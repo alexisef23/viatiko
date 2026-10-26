@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viatiko | Diseña tu Viaje Soñado y Personalizado con IA</title>
+  <meta name="description" content="Organiza tu viaje fácil, rápido y 100% a tu medida. Elige destino, presupuesto, fechas e intereses y generamos tu itinerario perfecto con hoteles, restaurantes y actividades.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="theme-color" content="#080C14">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://alexisef23.github.io/viatiko/">
+  <meta property="og:title" content="Viatiko | Diseña tu Viaje Soñado y Personalizado con IA">
+  <meta property="og:description" content="Organiza tu viaje inteligente a tu medida en 60 segundos con hoteles recomendados, rutas día a día y presupuesto calculado.">
+  <meta property="og:image" content="https://alexisef23.github.io/viatiko/assets/hero.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Viatiko | Diseña tu Viaje Soñado con IA">
+  <meta name="twitter:description" content="Organiza tu viaje inteligente a tu medida en 60 segundos con itinerarios completos.">
+  <meta name="twitter:image" content="https://alexisef23.github.io/viatiko/assets/hero.jpg">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons for crisp UI icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Background Ambient Glows -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar" id="main-nav">
+    <div class="nav-container">
+      <a href="#" class="brand-logo" id="logo-link">
+        <div class="logo-icon">
+          <i class="fa-solid fa-compass fa-spin-hover"></i>
+        </div>
+        <span class="brand-name">Viatiko<span class="gradient-dot">.</span></span>
+        <span class="badge-ai">IA Planner</span>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="#wizard-section" class="nav-link"><i class="fa-solid fa-wand-magic-sparkles"></i> Planificador</a>
+        <a href="#destinos" class="nav-link"><i class="fa-solid fa-map-location-dot"></i> Destinos Top</a>
+        <a href="#experiencia" class="nav-link"><i class="fa-solid fa-bolt"></i> ¿Cómo Funciona?</a>
+        <a href="#comunidad" class="nav-link"><i class="fa-solid fa-heart"></i> Opiniones</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Currency Selector -->
+        <div class="currency-selector" title="Cambiar divisa">
+          <select id="currency-select" aria-label="Moneda">
+            <option value="USD">USD ($)</option>
+            <option value="MXN" selected>MXN ($)</option>
+            <option value="EUR">EUR (€)</option>
+          </select>
+        </div>
+
+        <!-- Audio toggle for gamification -->
+        <button id="sound-toggle-btn" class="icon-btn" title="Sonidos de la interfaz" aria-label="Alternar sonido">
+          <i class="fa-solid fa-volume-high" id="sound-icon"></i>
+        </button>
+
+        <a href="#wizard-section" class="btn btn-primary btn-glow nav-desktop-cta" id="nav-cta-btn">
+          <span>Crear mi Viaje</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+        <!-- Mobile Drawer Toggle -->
+        <button id="mobile-menu-toggle" class="icon-btn mobile-menu-btn" title="Menú de navegación" aria-label="Abrir menú">
+          <i class="fa-solid fa-bars" id="menu-icon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer Overlay -->
+  <div class="mobile-drawer-overlay hidden" id="mobile-drawer-overlay">
+    <div class="mobile-drawer glass-card">
+      <div class="drawer-header">
+        <div class="brand-logo">
+          <div class="logo-icon"><i class="fa-solid fa-compass"></i></div>
+          <span class="brand-name">Viatiko<span class="gradient-dot">.</span></span>
+        </div>
+        <button id="drawer-close-btn" class="icon-btn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <nav class="drawer-nav">
+        <a href="#wizard-section" class="drawer-link"><i class="fa-solid fa-wand-magic-sparkles"></i> Planificador IA</a>
+        <a href="#destinos" class="drawer-link"><i class="fa-solid fa-map-location-dot"></i> Destinos Top</a>
+        <a href="#experiencia" class="drawer-link"><i class="fa-solid fa-bolt"></i> ¿Cómo Funciona?</a>
+        <a href="#comunidad" class="drawer-link"><i class="fa-solid fa-heart"></i> Opiniones</a>
+      </nav>
+      <div class="drawer-actions">
+        <a href="#wizard-section" class="btn btn-primary btn-glow btn-block" id="drawer-cta-btn">
+          <span>Crear mi Viaje</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-container">
+      <div class="hero-badge">
+        <span class="pulse-indicator"></span>
+        <i class="fa-solid fa-sparkles"></i>
+        <span>La nueva forma inteligente de viajar en 2026</span>
+      </div>
+
+      <h1 class="hero-title">
+        Tu viaje soñado, <br>
+        <span class="gradient-text">organizado a tu medida</span> en segundos.
+      </h1>
+
+      <p class="hero-subtitle">
+        Dinos tu destino, presupuesto, fechas, con quién viajas e intereses. 
+        Nuestra inteligencia artificial diseña el plan perfecto: hoteles increíbles, joyas gastronómicas, 
+        rutas día a día y actividades sin trampas para turistas.
+      </p>
+
+      <!-- Hero Social Proof Stats -->
+      <div class="hero-stats">
+        <div class="stat-pill">
+          <i class="fa-solid fa-users"></i>
+          <div>
+            <strong>+48,000</strong>
+            <span>Viajeros felices</span>
+          </div>
+        </div>
+        <div class="stat-pill">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <div>
+            <strong>60 segundos</strong>
+            <span>Tiempo de creación</span>
+          </div>
+        </div>
+        <div class="stat-pill">
+          <i class="fa-solid fa-piggy-bank"></i>
+          <div>
+            <strong>~35% ahorro</strong>
+            <span>En presupuesto real</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Fast Search Bar in Hero -->
+      <div class="hero-quick-search glass-card" id="quick-search-box">
+        <div class="search-item">
+          <label><i class="fa-solid fa-earth-americas"></i> ¿A dónde sueñas ir?</label>
+          <input type="text" id="quick-dest-input" placeholder="Ej. Tokio, Oaxaca, Roma, Bali..." autocomplete="off">
+          <div class="quick-dropdown" id="quick-dest-dropdown"></div>
+        </div>
+        <div class="search-divider"></div>
+        <div class="search-item">
+          <label><i class="fa-solid fa-user-group"></i> ¿Con quién vas?</label>
+          <select id="quick-company-select">
+            <option value="amigos">Con amigos (Diversión & Planes)</option>
+            <option value="pareja">En pareja (Romance & Chill)</option>
+            <option value="solo">Solo / Mochilero (Libertad)</option>
+            <option value="familia">En familia (Confort total)</option>
+          </select>
+        </div>
+        <div class="search-divider"></div>
+        <div class="search-item">
+          <label><i class="fa-solid fa-wallet"></i> Presupuesto</label>
+          <select id="quick-budget-select">
+            <option value="equilibrado">Equilibrado (Hoteles top + buen comer)</option>
+            <option value="mochilero">Mochilero / Económico</option>
+            <option value="lujo">Lujo & Exclusividad VIP</option>
+          </select>
+        </div>
+        <button class="btn btn-primary btn-search" id="quick-start-btn">
+          <span>Comenzar Ahora</span>
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </button>
+      </div>
+
+      <!-- Floating Travel Badges -->
+      <div class="floating-chips-row">
+        <span class="chip-label">Destinos en tendencia hoy:</span>
+        <button class="tag-chip active" data-dest="Oaxaca, México">🇲🇽 Oaxaca</button>
+        <button class="tag-chip" data-dest="Tokio, Japón">🇯🇵 Tokio</button>
+        <button class="tag-chip" data-dest="Bali, Indonesia">🇮🇩 Bali</button>
+        <button class="tag-chip" data-dest="Roma, Italia">🇮🇹 Roma</button>
+        <button class="tag-chip" data-dest="Nueva York, EE. UU.">🇺🇸 Nueva York</button>
+        <button class="tag-chip" data-dest="Medellín, Colombia">🇨🇴 Medellín</button>
+        <button class="tag-chip tag-chip-random" id="hero-random-btn" title="Elegir un destino al azar"><i class="fa-solid fa-dice"></i> ¡Sorpréndeme!</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Planner Wizard Section -->
+  <section class="wizard-section" id="wizard-section">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <div class="sub-badge"><i class="fa-solid fa-compass-drafting"></i> Creador Inteligente</div>
+        <h2 class="section-title">Personaliza tu aventura paso a paso</h2>
+        <p class="section-desc">Configura los detalles en menos de 1 minuto y deja que nuestra plataforma haga la magia por ti.</p>
+      </div>
+
+      <!-- Wizard Main Card -->
+      <div class="wizard-card glass-card" id="wizard-card">
+        <!-- Wizard Steps Progress Bar -->
+        <div class="wizard-progress-bar">
+          <div class="progress-step active" data-step="1">
+            <span class="step-num">1</span>
+            <span class="step-label">Destino</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step" data-step="2">
+            <span class="step-num">2</span>
+            <span class="step-label">Compañía</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step" data-step="3">
+            <span class="step-num">3</span>
+            <span class="step-label">Duración</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step" data-step="4">
+            <span class="step-num">4</span>
+            <span class="step-label">Presupuesto</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step" data-step="5">
+            <span class="step-num">5</span>
+            <span class="step-label">Tus Gustos</span>
+          </div>
+        </div>
+
+        <form id="travel-wizard-form" onsubmit="return false;">
+          <!-- STEP 1: DESTINO -->
+          <div class="wizard-step-panel active" id="step-panel-1">
+            <div class="step-header">
+              <h3><i class="fa-solid fa-location-dot gradient-icon"></i> ¿Cuál es el destino de tu próximo viaje?</h3>
+              <p>Puedes elegir una ciudad cosmopolita, pueblos mágicos, paraísos de playa o naturaleza salvaje.</p>
+            </div>
+
+            <div class="input-search-wrapper">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              <input type="text" id="destination-input" class="wizard-main-input" placeholder="Escribe tu destino (Ej. Oaxaca, Tokio, Roma, Bali...)" autocomplete="off">
+              <button type="button" id="clear-dest-btn" class="clear-input-btn hidden"><i class="fa-solid fa-xmark"></i></button>
+              <div class="autocomplete-list" id="dest-autocomplete"></div>
+            </div>
+
+            <!-- Popular Destination Cards Grid -->
+            <div class="popular-dest-grid">
+              <div class="popular-card" data-city="Oaxaca, México" data-bg="assets/oaxaca.jpg">
+                <img src="assets/oaxaca.jpg" alt="Oaxaca">
+                <div class="card-overlay">
+                  <span class="city-flag">🇲🇽</span>
+                  <h4>Oaxaca, México</h4>
+                  <p>Gastronomía, cultura y mezcal artesanal</p>
+                </div>
+              </div>
+              <div class="popular-card" data-city="Tokio, Japón" data-bg="assets/tokyo.jpg">
+                <img src="assets/tokyo.jpg" alt="Tokio">
+                <div class="card-overlay">
+                  <span class="city-flag">🇯🇵</span>
+                  <h4>Tokio, Japón</h4>
+                  <p>Luces de neón, ramen y templos milenarios</p>
+                </div>
+              </div>
+              <div class="popular-card" data-city="Bali, Indonesia" data-bg="assets/hero.jpg">
+                <img src="assets/hero.jpg" alt="Bali">
+                <div class="card-overlay">
+                  <span class="city-flag">🇮🇩</span>
+                  <h4>Bali, Indonesia</h4>
+                  <p>Cascadas, playas tropicales, templos y yoga</p>
+                </div>
+              </div>
+              <div class="popular-card" data-city="Roma, Italia" data-bg="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=700&q=80">
+                <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=700&q=80" alt="Roma">
+                <div class="card-overlay">
+                  <span class="city-flag">🇮🇹</span>
+                  <h4>Roma, Italia</h4>
+                  <p>Historia eterna, trattorias y gelato artesanal</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 2: COMPAÑÍA -->
+          <div class="wizard-step-panel" id="step-panel-2">
+            <div class="step-header">
+              <h3><i class="fa-solid fa-users gradient-icon"></i> ¿Con quién vas a viajar?</h3>
+              <p>Adaptamos el ritmo de las actividades, el tipo de hospedaje y las sugerencias a tu grupo.</p>
+            </div>
+
+            <div class="options-grid company-grid">
+              <div class="option-card" data-value="solo">
+                <div class="option-icon-box"><i class="fa-solid fa-person-walking-luggage"></i></div>
+                <h4>En Solitario</h4>
+                <p>Libertad para improvisar, conocer gente nueva y moverte a tu propio ritmo.</p>
+                <span class="tag-badge">Mochilero / Nómada</span>
+              </div>
+              <div class="option-card" data-value="pareja">
+                <div class="option-icon-box"><i class="fa-solid fa-heart"></i></div>
+                <h4>En Pareja</h4>
+                <p>Cenas con vista, atardeceres mágicos, rincones íntimos y planes románticos.</p>
+                <span class="tag-badge">Romance & Relax</span>
+              </div>
+              <div class="option-card selected" data-value="amigos">
+                <div class="option-icon-box"><i class="fa-solid fa-champagne-glasses"></i></div>
+                <h4>Con Amigos</h4>
+                <p>Diversión garantizada, fiesta, actividades grupales, planes épicos y fotos geniales.</p>
+                <span class="tag-badge recommended">¡El más popular!</span>
+              </div>
+              <div class="option-card" data-value="familia">
+                <div class="option-icon-box"><i class="fa-solid fa-people-roof"></i></div>
+                <h4>En Familia</h4>
+                <p>Comodidad, actividades seguras para todas las edades y logística sin complicaciones.</p>
+                <span class="tag-badge">Confort & Seguridad</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3: FECHAS Y DURACIÓN -->
+          <div class="wizard-step-panel" id="step-panel-3">
+            <div class="step-header">
+              <h3><i class="fa-solid fa-calendar-days gradient-icon"></i> ¿Cuántos días durará la experiencia?</h3>
+              <p>Optimizamos el itinerario para aprovechar cada hora sin prisas ni agotamiento.</p>
+            </div>
+
+            <div class="duration-selector-wrapper">
+              <div class="duration-presets">
+                <button type="button" class="duration-btn" data-days="3">
+                  <strong>3 Días</strong>
+                  <span>Escapada de fin de semana</span>
+                </button>
+                <button type="button" class="duration-btn active" data-days="5">
+                  <strong>5 Días</strong>
+                  <span>Puente o viaje perfecto</span>
+                </button>
+                <button type="button" class="duration-btn" data-days="7">
+                  <strong>7 Días</strong>
+                  <span>1 semana completa</span>
+                </button>
+                <button type="button" class="duration-btn" data-days="10">
+                  <strong>10 Días</strong>
+                  <span>Inmersión profunda</span>
+                </button>
+                <button type="button" class="duration-btn" data-days="14">
+                  <strong>14 Días</strong>
+                  <span>Gran viaje épico</span>
+                </button>
+              </div>
+
+              <!-- Custom days slider -->
+              <div class="slider-box">
+                <div class="slider-header">
+                  <span>O ajusta los días manualmente:</span>
+                  <span class="slider-counter" id="days-display">5 días de viaje</span>
+                </div>
+                <input type="range" id="days-slider" min="2" max="15" value="5" class="custom-range">
+              </div>
+
+              <!-- Month/Season of travel -->
+              <div class="season-box">
+                <label><i class="fa-solid fa-sun-plant-wilt"></i> ¿En qué época planeas viajar?</label>
+                <div class="season-chips">
+                  <button type="button" class="season-chip active" data-season="Primavera">🌸 Primavera</button>
+                  <button type="button" class="season-chip" data-season="Verano">☀️ Verano</button>
+                  <button type="button" class="season-chip" data-season="Otoño">🍂 Otoño</button>
+                  <button type="button" class="season-chip" data-season="Invierno">❄️ Invierno</button>
+                  <button type="button" class="season-chip" data-season="Flexible">✨ Aún no lo sé / Flexible</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 4: PRESUPUESTO -->
+          <div class="wizard-step-panel" id="step-panel-4">
+            <div class="step-header">
+              <h3><i class="fa-solid fa-wallet gradient-icon"></i> ¿Cuál es tu presupuesto y estilo?</h3>
+              <p>Tu dinero rendirá al máximo: encontramos las mejores opciones calidad-precio sin costes ocultos.</p>
+            </div>
+
+            <div class="budget-tiers-grid">
+              <div class="budget-card" data-tier="mochilero">
+                <div class="tier-badge">Ahorro Inteligente</div>
+                <div class="tier-price" id="price-tier-mochilero">$700 MXN / día</div>
+                <div class="tier-name">Mochilero / Low-Cost</div>
+                <ul class="tier-features">
+                  <li><i class="fa-solid fa-check"></i> Hostels con vibra social o Airbnbs económicos</li>
+                  <li><i class="fa-solid fa-check"></i> Street food legendaria y taquerías locales</li>
+                  <li><i class="fa-solid fa-check"></i> Rutas en transporte público y caminatas</li>
+                  <li><i class="fa-solid fa-check"></i> Actividades gratuitas y días con descuento</li>
+                </ul>
+              </div>
+
+              <div class="budget-card selected" data-tier="equilibrado">
+                <div class="tier-badge recommended-badge">Más Elegido ⭐</div>
+                <div class="tier-price" id="price-tier-equilibrado">$2,200 MXN / día</div>
+                <div class="tier-name">Equilibrado / Confort</div>
+                <ul class="tier-features">
+                  <li><i class="fa-solid fa-check"></i> Hoteles boutique céntricos de 3-4 estrellas</li>
+                  <li><i class="fa-solid fa-check"></i> Mix de restaurantes recomendados y cocina local</li>
+                  <li><i class="fa-solid fa-check"></i> Uber / Taxi y tours guiados selectos</li>
+                  <li><i class="fa-solid fa-check"></i> Experiencias únicas con entradas incluidas</li>
+                </ul>
+              </div>
+
+              <div class="budget-card" data-tier="lujo">
+                <div class="tier-badge">Experiencia VIP</div>
+                <div class="tier-price" id="price-tier-lujo">$5,500+ MXN / día</div>
+                <div class="tier-name">Premium / Lujo</div>
+                <ul class="tier-features">
+                  <li><i class="fa-solid fa-check"></i> Resorts 5 estrellas y suites con vista panorámica</li>
+                  <li><i class="fa-solid fa-check"></i> Fine dining, terrazas exclusivas y chefs reconocidos</li>
+                  <li><i class="fa-solid fa-check"></i> Chofer privado y acceso VIP sin filas</li>
+                  <li><i class="fa-solid fa-check"></i> Catas privadas, spas y experiencias exclusivas</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Estimated total budget simulator banner -->
+            <div class="budget-total-banner">
+              <i class="fa-solid fa-calculator"></i>
+              <span>Presupuesto total estimado para <strong><span id="banner-days">5</span> días</strong>: <strong class="highlight-val" id="banner-total">$11,000 MXN</strong> por persona</span>
+            </div>
+          </div>
+
+          <!-- STEP 5: TUS GUSTOS E INTERESES -->
+          <div class="wizard-step-panel" id="step-panel-5">
+            <div class="step-header">
+              <h3><i class="fa-solid fa-heart-pulse gradient-icon"></i> ¿Qué vibra buscas en este viaje?</h3>
+              <p>Selecciona todos los que te llamen la atención (mínimo 2 intereses para un match perfecto):</p>
+            </div>
+
+            <div class="interests-grid" id="interests-grid">
+              <button type="button" class="interest-chip selected" data-interest="gastronomia">
+                <span class="interest-icon">🌮</span>
+                <span class="interest-text">Gastronomía & Street Food</span>
+                <i class="fa-solid fa-check check-mark"></i>
+              </button>
+
+              <button type="button" class="interest-chip selected" data-interest="aventura">
+                <span class="interest-icon">🧗</span>
+                <span class="interest-text">Aventura & Adrenalina</span>
+                <i class="fa-solid fa-check check-mark"></i>
+              </button>
+
+              <button type="button" class="interest-chip" data-interest="cultura">
+                <span class="interest-icon">🏛️</span>
+                <span class="interest-text">Cultura, Arte & Historia</span>
+                <i class="fa-solid fa-check check-mark"></i>
+              </button>
+
+              <button type="button" class="interest-chip selected" data-interest="relax">
+                <span class="interest-icon">💆</span>
+                <span class="interest-text">Relax, Playas & Spa</span>
+                <i class="fa-solid fa-check check-mark"></i>
+              </button>
+
+              <button type="button" class="interest-chip" data-interest="fiesta">
+                <span class="interest-icon">🍸</span>
+                <span class="interest-text">Vida Nocturna & Coctelería</span>
+                <i class="fa-solid fa-check check-mark"></i>
+              </button>
+
+              <button type="button" class="interest-chip" data-interest="naturaleza">
+                <span class="interest-icon">🌿</span>
+                <span class="interest-text">Naturaleza & Senderismo</span>
+                <i class="fa-solid fa-check check-mark"></i>
+              </button>
+
+              <button type="button" class="interest-chip" data-interest="fotografia">
+                <span class="interest-icon">📸</span>
+                <span class="interest-text">Spots Fotográficos & Miradores</span>
+                <i class="fa-solid fa-check check-mark"></i>
+              </button>
+
+              <button type="button" class="interest-chip" data-interest="shopping">
+                <span class="interest-icon">🛍️</span>
+                <span class="interest-text">Mercados & Compras Locales</span>
+                <i class="fa-solid fa-check check-mark"></i>
+              </button>
+            </div>
+
+            <div class="special-notes-box">
+              <label><i class="fa-solid fa-comment-dots"></i> ¿Alguna petición especial o restricción?</label>
+              <input type="text" id="special-notes-input" placeholder="Ej: Soy vegetariano, nos encanta el café de especialidad, preferimos evitar multitudes...">
+            </div>
+          </div>
+
+          <!-- Wizard Footer Controls -->
+          <div class="wizard-footer">
+            <button type="button" class="btn btn-outline" id="wizard-prev-btn" style="visibility: hidden;">
+              <i class="fa-solid fa-arrow-left"></i>
+              <span>Anterior</span>
+            </button>
+
+            <div class="wizard-step-indicator">
+              Paso <span id="current-step-display">1</span> de 5
+            </div>
+
+            <button type="button" class="btn btn-primary btn-glow" id="wizard-next-btn">
+              <span>Siguiente</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+            <button type="button" class="btn btn-gradient btn-glow hidden" id="wizard-generate-btn">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span>¡Crear Mi Plan Perfecto!</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Generating Loader Modal -->
+  <div class="modal-backdrop hidden" id="ai-loading-modal">
+    <div class="ai-loader-box glass-card">
+      <div class="ai-orb">
+        <div class="orb-inner"></div>
+        <i class="fa-solid fa-compass fa-spin ai-compass"></i>
+      </div>
+      <h3 class="loader-title">Diseñando tu itinerario inteligente con IA...</h3>
+      <p class="loader-status" id="loader-status-text">Analizando rutas y tiempos de traslado en <span id="loading-target-dest">Oaxaca</span>...</p>
+      
+      <div class="loader-progress-track">
+        <div class="loader-progress-fill" id="loader-progress-fill"></div>
+      </div>
+
+      <div class="loader-steps-list">
+        <div class="l-step done" id="l-step-1"><i class="fa-solid fa-circle-check"></i> <span>Destino y preferencias fijadas</span></div>
+        <div class="l-step active" id="l-step-2"><i class="fa-solid fa-circle-notch fa-spin"></i> <span>Seleccionando mejores alojamientos y zonas seguras</span></div>
+        <div class="l-step pending" id="l-step-3"><i class="fa-regular fa-circle"></i> <span>Curando restaurantes y spots locales sin trampas</span></div>
+        <div class="l-step pending" id="l-step-4"><i class="fa-regular fa-circle"></i> <span>Optimizando presupuesto y cronograma día a día</span></div>
+      </div>
+
+      <div class="loader-quote-banner" id="loader-quote-banner">
+        <i class="fa-solid fa-quote-left quote-icon"></i>
+        <span id="loader-quote-text">"El mundo es un libro y aquellos que no viajan solo leen una página."</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ITINERARY RESULT DISPLAY SECTION (Hidden until generated) -->
+  <section class="itinerary-result-section hidden" id="itinerary-result-section">
+    <div class="section-container">
+      
+      <!-- Generated Trip Header Card -->
+      <div class="itinerary-header-card glass-card" id="itinerary-header-card">
+        <div class="header-content">
+          <div class="header-tags" id="result-tags-row">
+            <span class="badge-pill"><i class="fa-solid fa-sparkles"></i> Itinerario Inteligente</span>
+            <span class="badge-pill secondary" id="res-badge-company">Con Amigos</span>
+            <span class="badge-pill secondary" id="res-badge-budget">Presupuesto Equilibrado</span>
+            <span class="badge-pill secondary" id="res-badge-duration">5 Días</span>
+          </div>
+          
+          <h2 class="result-title" id="res-destination-title">Aventura Épica en Oaxaca, México</h2>
+          <p class="result-subtitle" id="res-summary-text">
+            Un itinerario balanceado para disfrutar con amigos: mezcal tradicional, mercados gastronómicos de fama mundial, arquitectura colonial y aventura en la Sierra.
+          </p>
+
+          <div class="result-action-bar">
+            <button class="btn btn-outline-white" id="btn-print-pdf" title="Descargar o imprimir itinerario completo en PDF">
+              <i class="fa-solid fa-file-pdf"></i> Guardar en PDF / Imprimir
+            </button>
+            <button class="btn btn-outline-white" id="btn-export-ics" title="Exportar actividades a Google Calendar, Apple Calendar o Outlook">
+              <i class="fa-solid fa-calendar-plus"></i> Añadir a Calendario (.ics)
+            </button>
+            <button class="btn btn-outline-white" id="btn-share-whatsapp" title="Enviar plan formateado por WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i> Compartir con Amigos
+            </button>
+            <button class="btn btn-outline-white" id="btn-copy-link" title="Copiar enlace directo">
+              <i class="fa-solid fa-link"></i> Copiar Enlace
+            </button>
+            <button class="btn btn-primary" id="btn-edit-plan">
+              <i class="fa-solid fa-sliders"></i> Ajustar Preferencias
+            </button>
+          </div>
+        </div>
+
+        <div class="header-media">
+          <img id="res-hero-image" src="assets/oaxaca.jpg" alt="Destino seleccionado">
+          <div class="media-badge" id="res-budget-badge">
+            <span class="label">Presupuesto Estimado</span>
+            <span class="amount" id="res-budget-amount">$11,000 MXN</span>
+            <span class="subtext">por persona (~$2,200/día)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Nav for Itinerary sections -->
+      <div class="itinerary-tabs-bar">
+        <button class="tab-btn active" data-target="tab-timeline"><i class="fa-solid fa-route"></i> Itinerario Día a Día</button>
+        <button class="tab-btn" data-target="tab-hotels"><i class="fa-solid fa-bed"></i> Dónde Hospedarte</button>
+        <button class="tab-btn" data-target="tab-food"><i class="fa-solid fa-utensils"></i> Gastronomía Imperdible</button>
+        <button class="tab-btn" data-target="tab-budget"><i class="fa-solid fa-chart-pie"></i> Desglose de Gastos</button>
+        <button class="tab-btn" data-target="tab-packing"><i class="fa-solid fa-suitcase-rolling"></i> Maleta y Consejos</button>
+        <button class="tab-btn" data-target="tab-weather"><i class="fa-solid fa-cloud-sun"></i> Clima y Época</button>
+      </div>
+
+      <!-- Tab Content 1: Timeline Día a Día -->
+      <div class="itinerary-tab-pane active" id="tab-timeline">
+        <div class="timeline-controls">
+          <div class="timeline-pills-row">
+            <span class="timeline-label">Selecciona el día:</span>
+            <div class="day-pills" id="timeline-day-pills">
+              <!-- Dynamically populated day pills -->
+            </div>
+          </div>
+          <button type="button" class="btn btn-outline-white btn-sm" id="btn-show-all-days" title="Ver todo el itinerario completo de todos los días">
+            <i class="fa-solid fa-layer-group"></i> <span>Ver Todos los Días</span>
+          </button>
+        </div>
+
+        <div class="day-timeline-container" id="day-timeline-container">
+          <!-- Dynamically populated activities -->
+        </div>
+      </div>
+
+      <!-- Tab Content 2: Dónde Hospedarte -->
+      <div class="itinerary-tab-pane" id="tab-hotels">
+        <div class="pane-header">
+          <h3><i class="fa-solid fa-bed gradient-icon"></i> Alojamientos Recomendados según tu Presupuesto</h3>
+          <p>Seleccionados por su excelente ubicación, seguridad y reseñas de viajeros recientes (+9.0/10).</p>
+        </div>
+        <div class="cards-grid" id="hotels-grid">
+          <!-- Dynamically generated hotels -->
+        </div>
+      </div>
+
+      <!-- Tab Content 3: Gastronomía -->
+      <div class="itinerary-tab-pane" id="tab-food">
+        <div class="pane-header">
+          <h3><i class="fa-solid fa-utensils gradient-icon"></i> Dónde Comer: De Puestos Legendarios a Terrazas Top</h3>
+          <p>La verdadera esencia del destino sin caer en restaurantes con sobreprecio para turistas.</p>
+        </div>
+        <div class="cards-grid" id="food-grid">
+          <!-- Dynamically generated food spots -->
+        </div>
+      </div>
+
+      <!-- Tab Content 4: Desglose de Gastos -->
+      <div class="itinerary-tab-pane" id="tab-budget">
+        <div class="pane-header">
+          <h3><i class="fa-solid fa-chart-pie gradient-icon"></i> Presupuesto Transparente y Calculado</h3>
+          <p>Estimación real para que disfrutes sin preocuparte por sorpresas financieras.</p>
+        </div>
+
+        <div class="budget-breakdown-card glass-card">
+          <div class="budget-summary-columns">
+            <div class="b-col">
+              <span class="b-label">Presupuesto Diario</span>
+              <strong class="b-val" id="breakdown-daily">$2,200 MXN</strong>
+            </div>
+            <div class="b-col">
+              <span class="b-label">Total por Persona (<span id="breakdown-days-count">5</span> días)</span>
+              <strong class="b-val highlight" id="breakdown-total">$11,000 MXN</strong>
+            </div>
+            <div class="b-col">
+              <div class="group-stepper-header">
+                <span class="b-label">Total Grupo (<span id="breakdown-group-count">4 personas</span>)</span>
+                <div class="stepper-widget">
+                  <button type="button" id="btn-group-dec" class="stepper-btn" aria-label="Menos viajeros"><i class="fa-solid fa-minus"></i></button>
+                  <span id="group-travelers-num" class="stepper-val">4</span>
+                  <button type="button" id="btn-group-inc" class="stepper-btn" aria-label="Más viajeros"><i class="fa-solid fa-plus"></i></button>
+                </div>
+              </div>
+              <strong class="b-val" id="breakdown-group-total">$33,000 MXN</strong>
+            </div>
+          </div>
+
+          <!-- Visual Bar Chart -->
+          <div class="budget-bar-wrapper">
+            <div class="budget-bar">
+              <div class="bar-segment seg-hotel" style="width: 38%;" title="Hospedaje: 38%"></div>
+              <div class="bar-segment seg-food" style="width: 28%;" title="Alimentos & Bebidas: 28%"></div>
+              <div class="bar-segment seg-activities" style="width: 20%;" title="Tours & Entradas: 20%"></div>
+              <div class="bar-segment seg-transport" style="width: 9%;" title="Transporte Local: 9%"></div>
+              <div class="bar-segment seg-extra" style="width: 5%;" title="Imprevistos: 5%"></div>
+            </div>
+            <div class="budget-legend">
+              <span class="leg-item"><span class="dot dot-hotel"></span> Hospedaje (~38%)</span>
+              <span class="leg-item"><span class="dot dot-food"></span> Alimentos & Tragos (~28%)</span>
+              <span class="leg-item"><span class="dot dot-activities"></span> Actividades & Entradas (~20%)</span>
+              <span class="leg-item"><span class="dot dot-transport"></span> Transporte Local (~9%)</span>
+              <span class="leg-item"><span class="dot dot-extra"></span> Imprevistos (~5%)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content 5: Maleta y Consejos -->
+      <div class="itinerary-tab-pane" id="tab-packing">
+        <div class="pane-header">
+          <h3><i class="fa-solid fa-suitcase-rolling gradient-icon"></i> Checklist para tu Maleta y Consejos Locales</h3>
+          <p>Lo indispensable para no cargar de más y viajar preparado.</p>
+        </div>
+        <div class="packing-grid" id="packing-grid">
+          <!-- Dynamically generated packing list and insider tips -->
+        </div>
+      </div>
+
+      <!-- Tab Content 6: Clima y Mejor Época -->
+      <div class="itinerary-tab-pane" id="tab-weather">
+        <div class="pane-header">
+          <h3><i class="fa-solid fa-cloud-sun gradient-icon"></i> Clima, Pronóstico y Temporadas Ideales</h3>
+          <p>Conoce las condiciones climáticas y la mejor época para viajar a tu destino.</p>
+        </div>
+        <div class="weather-grid" id="weather-grid">
+          <!-- Dynamically generated weather cards -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Trending Destinations Section (Inspiración) -->
+  <section class="destinos-section" id="destinos">
+    <div class="section-container">
+      <div class="section-header-row">
+        <div>
+          <div class="sub-badge"><i class="fa-solid fa-fire"></i> Inspiración Viajera</div>
+          <h2 class="section-title">Destinos favoritos de nuestra comunidad</h2>
+          <p class="section-desc">Selecciona cualquiera para cargar automáticamente un plan optimizado.</p>
+        </div>
+        <div class="dest-filters" id="dest-filter-buttons">
+          <button class="filter-pill active" data-filter="all">Todos</button>
+          <button class="filter-pill" data-filter="gastronomia">Gastronomía</button>
+          <button class="filter-pill" data-filter="playa">Playa & Sol</button>
+          <button class="filter-pill" data-filter="aventura">Aventura</button>
+          <button class="filter-pill" data-filter="cultura">Cultura</button>
+        </div>
+      </div>
+
+      <div class="destinations-showcase-grid" id="showcase-grid">
+        <!-- Oaxaca -->
+        <div class="dest-showcase-card" data-category="gastronomia cultura" data-city="Oaxaca, México">
+          <div class="card-img-wrap">
+            <img src="assets/oaxaca.jpg" alt="Oaxaca">
+            <span class="badge-price">Desde $700 MXN/día</span>
+          </div>
+          <div class="card-body">
+            <div class="dest-header-flex">
+              <h4>🇲🇽 Oaxaca, México</h4>
+              <span class="score-badge"><i class="fa-solid fa-star"></i> 4.9</span>
+            </div>
+            <p>La capital gastronómica de México. Mezcalerías de autor, mercados con cecina y tlayudas, y hierve el agua.</p>
+            <div class="card-tags">
+              <span>Gastronomía</span>
+              <span>Cultura</span>
+              <span>Fiesta con Amigos</span>
+            </div>
+            <button class="btn btn-card-plan" onclick="window.loadPlanDirectly('Oaxaca, México')">
+              <span>Generar Plan para Oaxaca</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tokio -->
+        <div class="dest-showcase-card" data-category="cultura gastronomia" data-city="Tokio, Japón">
+          <div class="card-img-wrap">
+            <img src="assets/tokyo.jpg" alt="Tokio">
+            <span class="badge-price">Desde $1,800 MXN/día</span>
+          </div>
+          <div class="card-body">
+            <div class="dest-header-flex">
+              <h4>🇯🇵 Tokio, Japón</h4>
+              <span class="score-badge"><i class="fa-solid fa-star"></i> 5.0</span>
+            </div>
+            <p>El balance perfecto entre templos ancestrales y el futuro cyberpunk. Izakayas, ramen de autor y miradores.</p>
+            <div class="card-tags">
+              <span>Gastronomía</span>
+              <span>Futurista</span>
+              <span>Fotografía</span>
+            </div>
+            <button class="btn btn-card-plan" onclick="window.loadPlanDirectly('Tokio, Japón')">
+              <span>Generar Plan para Tokio</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Bali -->
+        <div class="dest-showcase-card" data-category="playa aventura" data-city="Bali, Indonesia">
+          <div class="card-img-wrap">
+            <img src="assets/hero.jpg" alt="Bali">
+            <span class="badge-price">Desde $950 MXN/día</span>
+          </div>
+          <div class="card-body">
+            <div class="dest-header-flex">
+              <h4>🇮🇩 Bali, Indonesia</h4>
+              <span class="score-badge"><i class="fa-solid fa-star"></i> 4.9</span>
+            </div>
+            <p>El paraíso de los nómadas y soñadores: templos entre acantilados, arrozales en terrazas, surf y clubes de playa.</p>
+            <div class="card-tags">
+              <span>Playa & Sol</span>
+              <span>Aventura</span>
+              <span>Relax</span>
+            </div>
+            <button class="btn btn-card-plan" onclick="window.loadPlanDirectly('Bali, Indonesia')">
+              <span>Generar Plan para Bali</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Roma -->
+        <div class="dest-showcase-card" data-category="cultura gastronomia" data-city="Roma, Italia">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=800&q=80" alt="Roma">
+            <span class="badge-price">Desde $1,900 MXN/día</span>
+          </div>
+          <div class="card-body">
+            <div class="dest-header-flex">
+              <h4>🇮🇹 Roma, Italia</h4>
+              <span class="score-badge"><i class="fa-solid fa-star"></i> 4.8</span>
+            </div>
+            <p>Paseos nocturnos por el Coliseo, pasta fresca en Trastevere y atardeceres mágicos en el Pincio.</p>
+            <div class="card-tags">
+              <span>Historia</span>
+              <span>Pasta & Vino</span>
+              <span>Romance</span>
+            </div>
+            <button class="btn btn-card-plan" onclick="window.loadPlanDirectly('Roma, Italia')">
+              <span>Generar Plan para Roma</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Nueva York -->
+        <div class="dest-showcase-card" data-category="cultura gastronomia" data-city="Nueva York, EE. UU.">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=800&q=80" alt="Nueva York">
+            <span class="badge-price">Desde $2,800 MXN/día</span>
+          </div>
+          <div class="card-body">
+            <div class="dest-header-flex">
+              <h4>🇺🇸 Nueva York, EE. UU.</h4>
+              <span class="score-badge"><i class="fa-solid fa-star"></i> 4.9</span>
+            </div>
+            <p>La energía inagotable de la Gran Manzana: Broadway, miradores de rascacielos, Central Park y cafeterías secretas.</p>
+            <div class="card-tags">
+              <span>Metrópolis</span>
+              <span>Arte</span>
+              <span>Shopping</span>
+            </div>
+            <button class="btn btn-card-plan" onclick="window.loadPlanDirectly('Nueva York, EE. UU.')">
+              <span>Generar Plan para Nueva York</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Medellín -->
+        <div class="dest-showcase-card" data-category="aventura fiesta" data-city="Medellín, Colombia">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1599839575945-a9e5af0c3fa5?auto=format&fit=crop&w=800&q=80" alt="Medellín">
+            <span class="badge-price">Desde $800 MXN/día</span>
+          </div>
+          <div class="card-body">
+            <div class="dest-header-flex">
+              <h4>🇨🇴 Medellín, Colombia</h4>
+              <span class="score-badge"><i class="fa-solid fa-star"></i> 4.8</span>
+            </div>
+            <p>La ciudad de la eterna primavera: cultura en la Comuna 13, rooftops en Provenza y excursión a Guatapé.</p>
+            <div class="card-tags">
+              <span>Fiesta</span>
+              <span>Aventura</span>
+              <span>Clima Ideal</span>
+            </div>
+            <button class="btn btn-card-plan" onclick="window.loadPlanDirectly('Medellín, Colombia')">
+              <span>Generar Plan para Medellín</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works / Value Grid -->
+  <section class="features-section" id="experiencia">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <div class="sub-badge"><i class="fa-solid fa-bolt"></i> ¿Por qué Viatiko?</div>
+        <h2 class="section-title">Olvídate de tener 40 pestañas abiertas en el navegador</h2>
+        <p class="section-desc">Reunimos alojamientos, restaurantes, actividades y presupuesto en un solo plan interactivo y compartible.</p>
+      </div>
+
+      <div class="bento-features-grid">
+        <div class="bento-card bento-tall glass-card">
+          <div class="bento-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3>Cero trampas para turistas</h3>
+          <p>Filtramos sitios caros con mala calidad. Solo te recomendamos los lugares donde realmente van y comen los locales.</p>
+          <div class="bento-visual">
+            <div class="fake-review">
+              <span class="star-row">⭐⭐⭐⭐⭐</span>
+              <p>“En Oaxaca comimos en las mejores fondas y terrazas sin pagar caprichos de turista.”</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bento-card glass-card">
+          <div class="bento-icon"><i class="fa-solid fa-map"></i></div>
+          <h3>Rutas lógicas optimizadas</h3>
+          <p>No más cruzar la ciudad de un extremo a otro perdiendo 3 horas en tráfico. Organizamos las actividades por cercanía geográfica.</p>
+        </div>
+
+        <div class="bento-card glass-card">
+          <div class="bento-icon"><i class="fa-solid fa-share-nodes"></i></div>
+          <h3>Todo en un link para tu grupo</h3>
+          <p>Comparte el itinerario por WhatsApp con tus acompañantes para que todos voten, opinen y estén en la misma sintonía.</p>
+        </div>
+
+        <div class="bento-card bento-wide glass-card">
+          <div class="bento-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+          <div class="bento-text">
+            <h3>Presupuesto real y transparente</h3>
+            <p>Calculamos exactamente cuánto necesitas para hospedaje, comidas, atracciones y transporte diario en tu moneda local (MXN, USD o EUR).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section" id="comunidad">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <div class="sub-badge"><i class="fa-solid fa-comments"></i> Opiniones Reales</div>
+        <h2 class="section-title">Lo que dicen los viajeros</h2>
+        <p class="section-desc">Miles de personas ya viajan sin estrés con itinerarios hechos a su medida.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card glass-card">
+          <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+          <p class="quote">“Organizar el viaje con mis 4 amigos a Tokio solía ser una pesadilla de discusiones. Con Viatiko en 2 minutos teníamos el itinerario completo con bares, templos y ramen. ¡Fue el mejor viaje de nuestras vidas!”</p>
+          <div class="traveler-info">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Sofía Méndez">
+            <div>
+              <strong>Sofía Méndez</strong>
+              <span>Viaje a Tokio con amigos • 7 días</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card glass-card">
+          <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+          <p class="quote">“Buscábamos una escapada romántica a Oaxaca con presupuesto moderado. Nos recomendó terrazas hermosas, mezcalerías familiares y un hotel boutique que nunca hubiéramos encontrado en Google.”</p>
+          <div class="traveler-info">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Carlos & Fernanda">
+            <div>
+              <strong>Carlos & Elena</strong>
+              <span>Viaje en pareja a Oaxaca • 5 días</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card glass-card">
+          <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+          <p class="quote">“Viajé solo a Bali por primera vez y estaba nervioso con los traslados y el dinero. El desglose de gastos fue 100% certero y el itinerario me llevó a cascadas casi vacías. Una maravilla de herramienta.”</p>
+          <div class="traveler-info">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Mateo Rivas">
+            <div>
+              <strong>Mateo Rivas</strong>
+              <span>Viajero solo en Bali • 10 días</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive FAQ Accordion -->
+  <section class="faq-section">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <div class="sub-badge"><i class="fa-solid fa-circle-question"></i> Preguntas Frecuentes</div>
+        <h2 class="section-title">Todo lo que necesitas saber</h2>
+      </div>
+
+      <div class="faq-accordion-box">
+        <details class="faq-item glass-card" open>
+          <summary>
+            <span>¿Cómo sabe la plataforma qué lugares son los mejores?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </summary>
+          <p>Combinamos bases de datos de reseñas verificadas, sugerencias de guías locales y análisis de satisfacción de miles de viajeros. Filtramos trampas turísticas y priorizamos experiencias auténticas adaptadas a tus intereses particulares.</p>
+        </details>
+
+        <details class="faq-item glass-card">
+          <summary>
+            <span>¿Puedo modificar el itinerario una vez generado?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </summary>
+          <p>¡Sí, por supuesto! Puedes cambiar tus intereses, agregar más días, alternar actividades o regenerar partes del día con solo hacer clic en "Ajustar Preferencias".</p>
+        </details>
+
+        <details class="faq-item glass-card">
+          <summary>
+            <span>¿El servicio tiene algún costo?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </summary>
+          <p>Generar y consultar tus itinerarios completos, guardar en PDF y compartirlos con tu grupo es 100% gratuito. Nuestro objetivo es que viajar sea accesible, claro y libre de estrés para todos.</p>
+        </details>
+
+        <details class="faq-item glass-card">
+          <summary>
+            <span>¿Puedo compartir el itinerario con mis acompañantes?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </summary>
+          <p>¡Claro que sí! Con el botón "Compartir con Amigos" puedes enviar el plan directo a tu grupo de WhatsApp o copiar un enlace directo para que todos lo abran en su celular sin instalar nada.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Banner -->
+  <section class="cta-banner-section">
+    <div class="section-container">
+      <div class="cta-banner-card">
+        <div class="cta-glow"></div>
+        <h2>¿Listo para vivir el viaje de tu vida?</h2>
+        <p>Solo toma 60 segundos. Deja de soñar despierto y empieza a empacar.</p>
+        <a href="#wizard-section" class="btn btn-primary btn-glow btn-large">
+          <span>Diseñar Mi Itinerario Ahora</span>
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="section-container footer-content">
+      <div class="footer-brand">
+        <div class="brand-logo">
+          <div class="logo-icon"><i class="fa-solid fa-compass"></i></div>
+          <span class="brand-name">Viatiko<span class="gradient-dot">.</span></span>
+        </div>
+        <p>Tu asistente inteligente para planear viajes inolvidables, rápidos y personalizados. Aventura, cultura, gastronomía, relax o fiesta: todo en un mismo lugar.</p>
+        <div class="social-links">
+          <a href="https://github.com/alexisef23/viatiko" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-links-group">
+        <h4>Destinos Populares</h4>
+        <a href="#destinos" onclick="window.loadPlanDirectly('Oaxaca, México')">Oaxaca, México</a>
+        <a href="#destinos" onclick="window.loadPlanDirectly('Tokio, Japón')">Tokio, Japón</a>
+        <a href="#destinos" onclick="window.loadPlanDirectly('Bali, Indonesia')">Bali, Indonesia</a>
+        <a href="#destinos" onclick="window.loadPlanDirectly('Roma, Italia')">Roma, Italia</a>
+        <a href="#destinos" onclick="window.loadPlanDirectly('Medellín, Colombia')">Medellín, Colombia</a>
+      </div>
+
+      <div class="footer-links-group">
+        <h4>Estilos de Viaje</h4>
+        <a href="#wizard-section">Viajes con Amigos</a>
+        <a href="#wizard-section">Escapadas en Pareja</a>
+        <a href="#wizard-section">Mochilero / Solo Travel</a>
+        <a href="#wizard-section">Gastronómicos & Foodies</a>
+        <a href="#wizard-section">Aventura & Naturaleza</a>
+      </div>
+
+      <div class="footer-links-group">
+        <h4>Plataforma</h4>
+        <a href="#wizard-section">Planificador IA</a>
+        <a href="#experiencia">Cómo funciona</a>
+        <a href="#comunidad">Reseñas de la comunidad</a>
+        <a href="https://github.com/alexisef23/viatiko" target="_blank" rel="noopener noreferrer">Repositorio GitHub</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="section-container bottom-flex">
+        <p>© 2026 Viatiko • La nueva forma inteligente de diseñar tu viaje a medida.</p>
+        <p class="status-indicator"><span class="dot-online"></span> Motores IA activos y actualizados</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
