@@ -51,11 +51,12 @@
 
 ---
 
-## 🎨 Estética y Diseño
+## 🎨 Estética y Sistema de Diseño
 
-- **Dark Luxury UI**: Fondo oscuro cinematográfico (`#080C14`) con orbes ambientales de luz difusa y gradientes vibrantes (*Coral, Índigo y Cian*).
-- **Glassmorphism**: Tarjetas con `backdrop-filter: blur(20px)` y bordes translúcidos de alta fidelidad.
-- **Tipografía Moderna**: Encabezados en **Outfit** y cuerpo de texto en **Plus Jakarta Sans** optimizadas para lectura y jerarquía visual.
+- **Serene & Professional Light UI**: Paleta tranquila, fresca y ejecutiva inspirada en tonos nórdicos y mediterráneos: fondo luminoso gris nube (`#F8FAFC`), tarjetas de blanco puro con sutiles elevaciones y bordes de cristal suave (`#E2E8F0`).
+- **Acentos Calmos y Armoniosos**: Azul Egeo sereno (`#2563EB`), arena/terracota cálido (`#E07A5F`) y salvia/teal pacífico (`#0D9488`) para una experiencia de usuario descansada, refinada y profesional.
+- **Glassmorphism Luminoso**: Superficies traslúcidas (`rgba(255, 255, 255, 0.85)`) con desenfoque `backdrop-filter: blur(16px)` y sutiles halos de acuarela ambiental.
+- **Tipografía y Jerarquía Visual**: Encabezados en **Outfit** y cuerpo de texto en **Plus Jakarta Sans** con escala tipográfica limpia y contraste óptimo (WCAG AA).
 - **100% Responsivo**: Adaptado milimétricamente para móviles, tablets y escritorios, incluyendo un menú lateral deslizante (*drawer*) para pantallas pequeñas.
 
 ---
