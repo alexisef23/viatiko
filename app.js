@@ -250,7 +250,7 @@ const DESTINATIONS_DB = {
 
   "Bali, Indonesia": {
     country: "Indonesia",
-    image: "assets/hero.jpg",
+    image: "assets/bali.jpg",
     dailyBudget: { mochilero: 600, equilibrado: 1900, lujo: 6800 },
     summary: "Paraíso tropical entre arrozales esmeralda, templos en acantilados sobre el océano Índico, cascadas ocultas en la jungla, surf y la mejor cultura de clubes de playa.",
     highlights: ["Terrazas de Arroz de Tegallalang", "Templo Uluwatu & Danza Kecak", "Cascadas de Ubud", "Canggu Beach Clubs", "Nusa Penida Snorkel"],
@@ -323,7 +323,7 @@ const DESTINATIONS_DB = {
 
   "Roma, Italia": {
     country: "Italia",
-    image: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80",
+    image: "assets/rome.jpg",
     dailyBudget: { mochilero: 1100, equilibrado: 2900, lujo: 8200 },
     summary: "La Ciudad Eterna: un museo viviente donde cada esquina revela 2,500 años de grandeza imperial, fuentes barrocas, trattorias con cacio e pepe y gelato artesanal.",
     highlights: ["Coliseo & Foro Romano", "Fontana di Trevi & Panteón", "Trastevere de noche", "Vaticano & Capilla Sixtina", "Pasta & Gelato Tour"],
@@ -396,7 +396,7 @@ const DESTINATIONS_DB = {
 
   "Nueva York, EE. UU.": {
     country: "Estados Unidos",
-    image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=1200&q=80",
+    image: "assets/nyc.jpg",
     dailyBudget: { mochilero: 1400, equilibrado: 3800, lujo: 11000 },
     summary: "La capital del mundo: energía vertiginosa entre rascacielos legendarios, musicales de Broadway, museos de clase mundial, gastronomía de todas las naciones y Central Park.",
     highlights: ["Central Park en bici", "Miradores SUMMIT / Edge", "Broadway & Times Square", "Brooklyn Bridge & DUMBO", "Chelsea Market & High Line"],
@@ -469,7 +469,7 @@ const DESTINATIONS_DB = {
 
   "Medellín, Colombia": {
     country: "Colombia",
-    image: "https://images.unsplash.com/photo-1599839575945-a9e5af0c3fa5?auto=format&fit=crop&w=1200&q=80",
+    image: "assets/medellin.jpg",
     dailyBudget: { mochilero: 600, equilibrado: 1700, lujo: 5200 },
     summary: "La Ciudad de la Eterna Primavera: rodeada de montañas verdes, transformación social vibrante en la Comuna 13, rooftops en El Poblado, café suave y la calidez inigualable de los paisas.",
     highlights: ["Comuna 13 & Graffitour", "Guatapé & El Peñol", "Provenza & Parque Lleras", "Metrocable Arví", "Café de Especialidad"],
